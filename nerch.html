@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>NARCH STORE</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:#651323;color:#222;overflow-x:hidden;background-image:radial-gradient(rgba(255,255,255,.08) 2px,transparent 2px);background-size:28px 28px;padding:16px}
+.star{position:fixed;width:3px;height:3px;background:#fff;border-radius:50%;box-shadow:0 0 8px #fff;animation:twinkle 2s infinite;pointer-events:none}
+@keyframes twinkle{0%,100%{opacity:.2;transform:scale(.6)}50%{opacity:1;transform:scale(1.8)}}
+.wrap{max-width:420px;margin:auto}.card{background:#fff;border:3px solid #111;border-radius:24px;box-shadow:0 8px 0 #111;padding:14px;margin-bottom:14px}
+.top{display:flex;justify-content:space-between;align-items:center}.brand{display:flex;align-items:center;gap:10px}.logo{width:55px;height:55px;border-radius:16px;border:2px solid #111;object-fit:cover;background:#eee}.status{text-align:right}.online{background:#E8F7EC;border:2px solid #111;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:bold}
+.banner{padding:0;overflow:hidden}.banner img{width:100%;height:180px;object-fit:cover;display:block}
+.step{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.s{background:#fff;border:2px solid #111;border-radius:14px;padding:8px;text-align:center;font-size:11px;font-weight:bold}
+.pkg{border:2px solid #111;border-radius:16px;padding:12px;margin-top:10px;cursor:pointer;transition:.18s}.pkg.active{background:#651323;color:#fff;transform:translateY(-2px)}.price{font-size:28px;font-weight:900}
+input,textarea{width:100%;border:2px solid #111;border-radius:12px;padding:10px;margin-top:6px;font-size:14px}textarea{height:90px;resize:none}
+.info{background:#F5F5F5;border:2px solid #111;border-radius:14px;padding:10px;line-height:1.6;font-size:14px}
+button{width:100%;margin-top:14px;padding:15px;border:none;border-radius:16px;background:#651323;color:#fff;font-size:18px;font-weight:900;box-shadow:0 5px 0 #300811;cursor:pointer;transition:.15s;position:relative;overflow:hidden}
+button:active{transform:scale(.96);box-shadow:0 2px 0 #300811}
+button::before{content:"";position:absolute;top:0;left:-120%;width:45%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.9),transparent);transform:skewX(-25deg)}
+button.shine::before{animation:shine .8s linear}@keyframes shine{from{left:-120%}to{left:150%}}
+h1{color:#651323;font-size:28px}
+</style></head><body>
+<div class="wrap">
+<div class="card top"><div class="brand"><img src="logo.png" class="logo"><div><h1>NARCH</h1><small>CUSTOM SKIN STORE</small></div></div><div class="status"><div class="online">🟢 ONLINE</div><div id="jam" style="margin-top:4px;font-weight:bold">00:00</div></div></div>
+<div class="card banner"><img src="banner.gif" alt="Banner"></div>
+<div class="step"><div class="s">① PAKET</div><div class="s">② REQUEST</div><div class="s">③ ORDER</div></div>
+<div class="card"><h2>FORM PESANAN</h2><br><b>Nama Minecraft</b><input id="nama" placeholder="Contoh: NarchPlayer"><br><br><b>Pilih Paket</b>
+<div class="pkg active" data-p="Standart 35K"><b>Standart</b><div class="price">35K</div><small>64×64 • 1 Revisi</small></div>
+<div class="pkg" data-p="Premium 50K"><b>Premium</b><div class="price">50K</div><small>64×64 HD • 1 Revisi</small></div>
+<br><b>Deskripsi Skin</b><textarea id="desk" placeholder="Hoodie merah, celana hitam, mata biru..."></textarea>
+<button id="orderBtn" onclick="pesan()">PESAN SEKARANG</button></div>
+<div class="card"><h3>INFO ORDER</h3><div class="info">• Client mendapat 1 revisi gratis setelah skin jadi.<br><br>• 3 revisi gratis selama proses pengerjaan.<br><br>• Lebih dari itu +5K / revisi.</div></div>
+</div>
+<script>
+for(let i=0;i<55;i++){let s=document.createElement('div');s.className='star';s.style.left=Math.random()*100+'vw';s.style.top=Math.random()*100+'vh';s.style.animationDelay=Math.random()*2+'s';document.body.appendChild(s)}
+let paket='Standart 35K';
+document.querySelectorAll('.pkg').forEach(p=>p.onclick=()=>{document.querySelectorAll('.pkg').forEach(x=>x.classList.remove('active'));p.classList.add('active');paket=p.dataset.p});
+function updateJam(){let d=new Date();document.getElementById('jam').textContent=String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')}setInterval(updateJam,1000);updateJam();
+const btn=document.getElementById('orderBtn');setInterval(()=>{btn.classList.remove('shine');void btn.offsetWidth;btn.classList.add('shine')},2000);
+function pesan(){let no='+6283165768881';let txt=`Halo NARCH!\n\nNama: ${nama.value}\nPaket: ${paket}\n\nDeskripsi:\n${desk.value}`;window.open('https://wa.me/'+no+'?text='+encodeURIComponent(txt),'_blank')}
+</script></body></html>
